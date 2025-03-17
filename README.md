@@ -14,7 +14,7 @@ A modern time tracking application built with React, Vite, and Supabase.
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/asocastro/time-tracker.git
 cd timetracker
 ```
 
