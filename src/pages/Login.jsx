@@ -11,7 +11,7 @@ export default function Login() {
   const { signIn, signUp } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (isSignUp) {

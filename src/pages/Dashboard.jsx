@@ -4,24 +4,10 @@ import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
 import { Clock, LogOut } from 'lucide-react';
 
-interface Project {
-  id: string;
-  name: string;
-}
-
-interface TimeEntry {
-  id: string;
-  project_id: string;
-  description: string;
-  hours: number;
-  date: string;
-  project: Project;
-}
-
 export default function Dashboard() {
   const { user, signOut } = useAuth();
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [timeEntries, setTimeEntries] = useState<TimeEntry[]>([]);
+  const [projects, setProjects] = useState([]);
+  const [timeEntries, setTimeEntries] = useState([]);
   const [selectedProject, setSelectedProject] = useState('');
   const [description, setDescription] = useState('');
   const [hours, setHours] = useState(1);
@@ -54,7 +40,7 @@ export default function Dashboard() {
     if (data) setTimeEntries(data);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     const { error } = await supabase.from('time_entries').insert({
@@ -76,7 +62,7 @@ export default function Dashboard() {
     const projectName = entry.project.name;
     acc[projectName] = (acc[projectName] || 0) + entry.hours;
     return acc;
-  }, {} as Record<string, number>);
+  }, {});
 
   return (
     <div className="min-h-screen bg-gray-50">
